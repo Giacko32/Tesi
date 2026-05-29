@@ -88,15 +88,15 @@ class PruningReport:
 
         for i in range(self.n_blocks):
             Heads = {
-                "kept": list(range(self.model.blocks[i].attn.num_heads)),
+                "kept": [] if getattr(self.model.blocks[i].attn, 'is_empty', False) else list(range(self.model.blocks[i].attn.num_heads)),
                 "pruned": []
             }
             QK = {
-                "kept": list(range(self.model.blocks[i].attn.head_dim)),
+                "kept": [] if getattr(self.model.blocks[i].attn, 'is_empty', False) else list(range(self.model.blocks[i].attn.head_dim)),
                 "pruned": []
             }
             VProj = {
-                "kept": list(range(self.model.blocks[i].attn.head_dim)),
+                "kept": [] if getattr(self.model.blocks[i].attn, 'is_empty', False) else list(range(self.model.blocks[i].attn.head_dim)),
                 "pruned": []
             }
             MLP = {
